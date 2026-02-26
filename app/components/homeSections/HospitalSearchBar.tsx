@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import logo1 from "@/public/assist/images/logo.avif"
+import diagnostic from "@/public/assist/images/diagnostic.png"
 
 const HospitalSearchBar = () => {
   return (
-    <div className="relative w-full bg-[url('/assist/banner/banner1.jpg')] bg-cover bg-center py-16">
+    <div className="mb-10">
+    <div className="relative w-full bg-[url('/assist/images/babyHand.jpg')] bg-cover bg-center py-16">
       {/* Overlay for slight transparency */}
       <div className="absolute inset-0 bg-black/20"></div>
 
@@ -29,30 +32,31 @@ const HospitalSearchBar = () => {
         {/* Category Cards */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {/* Hospital */}
-          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-lg flex flex-col items-center justify-center p-8 shadow-md hover:shadow-lg transition cursor-pointer">
+          <div className="bg-transparent bg-opacity-40 backdrop-blur-md border rounded-lg flex flex-col items-center justify-center p-8 shadow-md hover:shadow-lg transition cursor-pointer">
             <Image
               width={100}
               height={100}
-              src="/icons/hospital-icon.png"
+              src={logo1 || ""}
               alt="Hospital"
               className="w-16 h-16 mb-4"
             />
-            <h3 className="text-lg font-semibold text-gray-800">Hospital</h3>
+            <h3 className="text-lg font-semibold text-white">Hospital</h3>
           </div>
 
           {/* Diagnostic */}
-          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-lg flex flex-col items-center justify-center p-8 shadow-md hover:shadow-lg transition cursor-pointer">
+          <div className="bg-transparent bg-opacity-40 border backdrop-blur-md rounded-lg flex flex-col items-center justify-center p-8 shadow-md hover:shadow-lg transition cursor-pointer">
             <Image
               width={100}
               height={100}
-              src="/icons/diagnostic-icon.png"
+              src={diagnostic || ""}
               alt="Diagnostic"
               className="w-16 h-16 mb-4"
             />
-            <h3 className="text-lg font-semibold text-gray-800">Diagnostic</h3>
+            <h3 className="text-lg font-semibold text-white">Diagnostic</h3>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

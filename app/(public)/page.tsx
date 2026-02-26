@@ -1,4 +1,5 @@
 import Banner from "../components/homeSections/Banner";
+import HospitalSearchBar from "../components/homeSections/HospitalSearchBar";
 import PublicNav from "../components/shared/PublicNav";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
         <PublicNav />
       </div>
       <Banner />
+      <HospitalSearchBar />
     </>
   );
 }
