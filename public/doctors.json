@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Arafat Rahman",
+    "gender": "Male",
+    "specialization": "General Medicine",
+    "designation": "MBBS, FCPS (Medicine)",
+    "experience_years": 12,
+    "symptom_keywords": ["fever", "cold", "cough", "weakness", "body pain"],
+    "visit_charge": 800,
+    "discount_percentage": 10,
+    "available_days": ["Sunday", "Tuesday", "Thursday"],
+    "visit_time": {
+      "start": "05:00 PM",
+      "end": "09:00 PM"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Dr. Nusrat Jahan",
+    "gender": "Female",
+    "specialization": "Gynecology",
+    "designation": "MBBS, FCPS (Gynae & Obs)",
+    "experience_years": 9,
+    "symptom_keywords": ["pregnancy", "irregular period", "abdominal pain", "hormonal problem"],
+    "visit_charge": 1000,
+    "discount_percentage": 5,
+    "available_days": ["Monday", "Wednesday", "Friday"],
+    "visit_time": {
+      "start": "04:00 PM",
+      "end": "08:00 PM"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Dr. Tanvir Hasan",
+    "gender": "Male",
+    "specialization": "Cardiology",
+    "designation": "MBBS, MD (Cardiology)",
+    "experience_years": 15,
+    "symptom_keywords": ["chest pain", "high blood pressure", "heart problem", "shortness of breath"],
+    "visit_charge": 1200,
+    "discount_percentage": 0,
+    "available_days": ["Sunday", "Monday", "Thursday"],
+    "visit_time": {
+      "start": "06:00 PM",
+      "end": "10:00 PM"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Dr. Sadia Islam",
+    "gender": "Female",
+    "specialization": "Dermatology",
+    "designation": "MBBS, DDV",
+    "experience_years": 7,
+    "symptom_keywords": ["skin allergy", "acne", "rash", "itching"],
+    "visit_charge": 900,
+    "discount_percentage": 15,
+    "available_days": ["Tuesday", "Wednesday", "Saturday"],
+    "visit_time": {
+      "start": "03:00 PM",
+      "end": "07:00 PM"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Dr. Mahmudul Karim",
+    "gender": "Male",
+    "specialization": "Orthopedics",
+    "designation": "MBBS, MS (Ortho)",
+    "experience_years": 11,
+    "symptom_keywords": ["bone pain", "joint pain", "fracture", "back pain"],
+    "visit_charge": 1100,
+    "discount_percentage": 10,
+    "available_days": ["Monday", "Thursday", "Saturday"],
+    "visit_time": {
+      "start": "05:30 PM",
+      "end": "09:30 PM"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Dr. Farhana Akter",
+    "gender": "Female",
+    "specialization": "Pediatrics",
+    "designation": "MBBS, FCPS (Child)",
+    "experience_years": 10,
+    "symptom_keywords": ["fever", "child cough", "vaccination", "newborn problem"],
+    "visit_charge": 850,
+    "discount_percentage": 20,
+    "available_days": ["Sunday", "Tuesday", "Friday"],
+    "visit_time": {
+      "start": "04:00 PM",
+      "end": "08:00 PM"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Dr. Imran Kabir",
+    "gender": "Male",
+    "specialization": "Neurology",
+    "designation": "MBBS, MD (Neuro)",
+    "experience_years": 14,
+    "symptom_keywords": ["headache", "migraine", "seizure", "dizziness"],
+    "visit_charge": 1300,
+    "discount_percentage": 5,
+    "available_days": ["Wednesday", "Friday"],
+    "visit_time": {
+      "start": "06:00 PM",
+      "end": "09:00 PM"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Dr. Sharmeen Chowdhury",
+    "gender": "Female",
+    "specialization": "ENT",
+    "designation": "MBBS, DLO",
+    "experience_years": 8,
+    "symptom_keywords": ["ear pain", "throat pain", "sinus", "hearing problem"],
+    "visit_charge": 750,
+    "discount_percentage": 10,
+    "available_days": ["Monday", "Wednesday", "Saturday"],
+    "visit_time": {
+      "start": "03:30 PM",
+      "end": "07:30 PM"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Dr. Rashedul Islam",
+    "gender": "Male",
+    "specialization": "Urology",
+    "designation": "MBBS, MS (Urology)",
+    "experience_years": 13,
+    "symptom_keywords": ["urine infection", "kidney stone", "urine pain"],
+    "visit_charge": 1150,
+    "discount_percentage": 0,
+    "available_days": ["Sunday", "Thursday"],
+    "visit_time": {
+      "start": "05:00 PM",
+      "end": "08:30 PM"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Dr. Lubna Ahmed",
+    "gender": "Female",
+    "specialization": "Psychiatry",
+    "designation": "MBBS, MD (Psychiatry)",
+    "experience_years": 6,
+    "symptom_keywords": ["depression", "anxiety", "stress", "sleep problem"],
+    "visit_charge": 1000,
+    "discount_percentage": 15,
+    "available_days": ["Tuesday", "Friday"],
+    "visit_time": {
+      "start": "04:30 PM",
+      "end": "07:30 PM"
+    }
+  },
+  {
+    "id": 11,
+    "name": "Dr. Saiful Bari",
+    "gender": "Male",
+    "specialization": "Endocrinology",
+    "designation": "MBBS, MD (Endocrine)",
+    "experience_years": 16,
+    "symptom_keywords": ["diabetes", "thyroid", "hormone imbalance"],
+    "visit_charge": 1250,
+    "discount_percentage": 10,
+    "available_days": ["Monday", "Thursday"],
+    "visit_time": {
+      "start": "05:00 PM",
+      "end": "09:00 PM"
+    }
+  },
+  {
+    "id": 12,
+    "name": "Dr. Tania Sultana",
+    "gender": "Female",
+    "specialization": "Ophthalmology",
+    "designation": "MBBS, DO (Eye)",
+    "experience_years": 9,
+    "symptom_keywords": ["eye pain", "blur vision", "eye infection"],
+    "visit_charge": 700,
+    "discount_percentage": 5,
+    "available_days": ["Wednesday", "Saturday"],
+    "visit_time": {
+      "start": "03:00 PM",
+      "end": "06:00 PM"
+    }
+  }
+]
