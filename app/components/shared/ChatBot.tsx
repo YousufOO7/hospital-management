@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
+import { getChatSessionId } from "@/app/lib/utlis/storage";
 import { Doctor } from "@/lib/types/doctor";
 import { useState, useEffect } from "react";
 
@@ -21,18 +23,18 @@ export default function ChatBot() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [sessionId] = useState(() => {
-    let id = localStorage.getItem("chatSession");
-    if (!id) {
-      id = crypto.randomUUID();
-      localStorage.setItem("chatSession", id);
-    }
-    return id;
-  });
+    const [sessionId, setSessionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    // this runs only in the browser
+    const id = getChatSessionId();
+    setSessionId(id);
+  }, []);
 
   const handleSend = async (message?: string) => {
     const textToSend = message || input;
     if (!textToSend.trim()) return;
+    if(!sessionId) return;
 
     setMessages((prev) => [...prev, { sender: "user", text: textToSend }]);
     setInput("");
