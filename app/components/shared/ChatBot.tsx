@@ -3,10 +3,7 @@
 import { Doctor } from "@/lib/types/doctor";
 import { useState, useEffect } from "react";
 
-type Message = {
-  sender: "user" | "bot";
-  text: string;
-};
+type Message = { sender: "user" | "bot"; text: string };
 
 const QUICK_REPLIES = [
   "I have fever and cough",
@@ -14,74 +11,48 @@ const QUICK_REPLIES = [
   "Skin allergy",
   "Headache",
   "Bone pain",
-  "Diabetes problem"
+  "Diabetes problem",
 ];
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { sender: "bot", text: "👋 Hello! I'm your hospital assistant. Please describe your symptoms, and I'll recommend the best doctor for you." },
+    { sender: "bot", text: "👋 Hello! I'm your hospital assistant. Please describe your symptoms, and I'll guide you." },
   ]);
   const [input, setInput] = useState("");
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState(false);
+  const [sessionId] = useState(() => {
+    let id = localStorage.getItem("chatSession");
+    if (!id) {
+      id = crypto.randomUUID();
+      localStorage.setItem("chatSession", id);
+    }
+    return id;
+  });
 
-  useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const res = await fetch("/doctors.json");
-        const data = await res.json();
-        setDoctors(data);
-      } catch (error) {
-        console.error("Error fetching doctors:", error);
-      }
-    };
-
-    fetchDoctors();
-  }, []);
-
-  const handleSend = (message?: string) => {
+  const handleSend = async (message?: string) => {
     const textToSend = message || input;
     if (!textToSend.trim()) return;
 
-    const userMessage = { sender: "user" as const, text: textToSend };
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, { sender: "user", text: textToSend }]);
     setInput("");
     setLoading(true);
 
-    setTimeout(() => {
-      const lowerInput = textToSend.toLowerCase();
+    try {
+      const res = await fetch("https://hospital-server-nu.vercel.app/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: textToSend, sessionId }),
+      });
 
-      const matchedDoctors = doctors.filter((doc) =>
-        doc.symptom_keywords.some((keyword: string) =>
-          lowerInput.includes(keyword.toLowerCase())
-        )
-      );
+      const data = await res.json();
+      setMessages((prev) => [...prev, { sender: "bot", text: data.reply }]);
+    } catch (error) {
+      console.error(error);
+      setMessages((prev) => [...prev, { sender: "bot", text: "Server error. Please try again." }]);
+    }
 
-      let botReply = "";
-
-      if (matchedDoctors.length === 0) {
-        botReply = "😔 I couldn't find any doctor matching your symptoms. Could you please describe your problem with different words?\n\nYou can try: fever, chest pain, skin problem, headache, etc.";
-      } else {
-        botReply = `✅ Found ${matchedDoctors.length} doctor(s):\n\n` +
-          matchedDoctors
-            .slice(0, 3)
-            .map(
-              (doc) =>
-                `👨‍⚕️ *${doc.name}*\n` +
-                `📌 ${doc.specialization}\n` +
-                `⏰ ${doc.visit_time.start} - ${doc.visit_time.end}\n` +
-                `💰 BDT ${doc.visit_charge} ${doc.discount_percentage > 0 ? `(🔥 ${doc.discount_percentage}% off)` : ""}`
-            )
-            .join("\n\n");
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: botReply },
-      ]);
-      setLoading(false);
-    }, 1000);
+    setLoading(false);
   };
 
   return (
@@ -109,9 +80,7 @@ export default function ChatBot() {
             {messages.map((msg, i) => (
               <div key={i} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`max-w-[80%] p-3 rounded-lg whitespace-pre-line text-sm ${
-                  msg.sender === "user"
-                    ? "bg-blue-600 text-white rounded-br-none"
-                    : "bg-white text-gray-800 rounded-bl-none shadow"
+                  msg.sender === "user" ? "bg-blue-600 text-white rounded-br-none" : "bg-white text-gray-800 rounded-bl-none shadow"
                 }`}>
                   {msg.text}
                 </div>
@@ -130,11 +99,7 @@ export default function ChatBot() {
               <p className="text-xs text-gray-500 mb-2">Quick replies:</p>
               <div className="flex flex-wrap gap-2">
                 {QUICK_REPLIES.map((reply) => (
-                  <button
-                    key={reply}
-                    onClick={() => handleSend(reply)}
-                    className="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition-colors"
-                  >
+                  <button key={reply} onClick={() => handleSend(reply)} className="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full transition-colors">
                     {reply}
                   </button>
                 ))}
@@ -152,11 +117,7 @@ export default function ChatBot() {
               onKeyPress={(e) => e.key === "Enter" && handleSend()}
               className="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button
-              onClick={() => handleSend()}
-              disabled={!input.trim() || loading}
-              className="bg-blue-600 text-white px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
+            <button onClick={() => handleSend()} disabled={!input.trim() || loading} className="bg-blue-600 text-white px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50">
               Send
             </button>
           </div>
