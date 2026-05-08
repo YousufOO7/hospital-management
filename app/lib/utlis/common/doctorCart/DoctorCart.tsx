@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { DoctorCartProps } from "@/lib/types/doctor";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaStar,
   FaHospitalUser
@@ -14,6 +15,8 @@ const DoctorCart: React.FC<DoctorCartProps> = ({ doctors }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {doctors?.map((doctor: any) => (
+      <>
+       <Link href={`doctor-details/${doctor._id}`}>
         <div 
           key={doctor._id} 
           className="overflow-hidden hover:shadow-lg transition-shadow duration-300 border"
@@ -58,6 +61,8 @@ const DoctorCart: React.FC<DoctorCartProps> = ({ doctors }) => {
             </div>
           </div>
         </div>
+      </Link>
+      </>
       ))}
     </div>
   );

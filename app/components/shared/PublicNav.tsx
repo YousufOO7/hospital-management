@@ -16,7 +16,9 @@ const PublicNav = () => {
           <div>
             {/* Logo */}
             {/* <span className="">{isLoading ? <ButtonLoader /> : platformName}</span> */}
-            <p className="text-xl font-bold text-black">Hospital Management</p>
+            <Link href="/">
+              <p className="text-xl font-bold text-black">Hospital Management</p>
+            </Link>
           </div>
           <div className="space-x-8">
             {publicNavigationLinks.map((link) => (
