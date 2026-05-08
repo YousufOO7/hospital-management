@@ -2,15 +2,18 @@
 import DoctorCart from "@/app/lib/utlis/common/doctorCart/DoctorCart";
 import { useEffect, useState } from "react";
 import { Doctor } from "@/lib/types/doctor";
-
+import Pagination from "@/app/lib/utlis/common/Pagination";
 
 const DoctorList: React.FC = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage] = useState<number>(6); 
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchDoctorsData = async (): Promise<void> => {
       try {
         setLoading(true);
@@ -23,11 +26,6 @@ const DoctorList: React.FC = () => {
         }
         
         const data = await res.json();
-        
-        // এখানে data সরাসরি array, কারণ আপনার API array return করছে
-        console.log("Doctors data:", data);
-        
-        // নিশ্চিত করুন data একটি array
         if (Array.isArray(data)) {
           setDoctors(data);
         } else {
@@ -47,7 +45,23 @@ const DoctorList: React.FC = () => {
     fetchDoctorsData();
   }, []);
 
-  console.log("doctor", doctors)
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [doctors]);
+
+  // Pagination calculations
+  const totalDoctors = doctors.length;
+  const totalPages = Math.ceil(totalDoctors / itemsPerPage);
+  
+  // Get current page doctors
+  const indexOfLastDoctor = currentPage * itemsPerPage;
+  const indexOfFirstDoctor = indexOfLastDoctor - itemsPerPage;
+  const currentDoctors = doctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+
+  // Handle page change
+  const handlePageChange = (page: number): void => {
+    setCurrentPage(page);
+  };
 
   // Loading State
   if (loading) {
@@ -58,11 +72,16 @@ const DoctorList: React.FC = () => {
             Doctor&apos;s Of Smart Hospital
           </h2>
         </div>
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((n) => (
-            <Skeleton key={n} className="h-80 w-full rounded-lg" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          {/* Optional: Add skeleton loaders here */}
+          {[...Array(6)].map((_, index) => (
+            <div key={index} className="border p-6 animate-pulse">
+              <div className="h-20 w-20 bg-gray-200 rounded mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+            </div>
           ))}
-        </div> */}
+        </div>
       </div>
     );
   }
@@ -71,7 +90,22 @@ const DoctorList: React.FC = () => {
   if (error) {
     return (
       <div className="container mx-auto p-4">
-            Error loading doctors: {error}
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+          Error loading doctors: {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (doctors.length === 0) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            Doctor&apos;s Of Smart Hospital
+          </h2>
+          <p className="text-gray-600">No doctors available at the moment.</p>
+        </div>
       </div>
     );
   }
@@ -82,13 +116,28 @@ const DoctorList: React.FC = () => {
         <h2 className="text-2xl font-bold text-gray-800">
           Doctor&apos;s Of Smart Hospital
           <span className="text-sm font-normal text-gray-500 ml-2">
-            ({doctors.length} doctor{doctors.length !== 1 ? 's' : ''} available)
+            ({totalDoctors} doctor{totalDoctors !== 1 ? 's' : ''} available)
           </span>
         </h2>
+        
+        {/* Optional: Items per page selector */}
+        <div className="text-sm text-gray-500">
+          Showing {indexOfFirstDoctor + 1} - {Math.min(indexOfLastDoctor, totalDoctors)} of {totalDoctors}
+        </div>
       </div>
 
-      {/* Pass the doctors array to DoctorCart */}
-      <DoctorCart doctors={doctors} />
+      <DoctorCart doctors={currentDoctors} />
+      
+      {/* Pagination Component */}
+      {totalPages > 1 && (
+        <div className="mt-8 flex justify-end">
+          <Pagination
+            currentPage={currentPage}
+            lastPage={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };
