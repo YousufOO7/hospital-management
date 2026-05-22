@@ -36,6 +36,8 @@ export default function ChatBot() {
     if (!textToSend.trim()) return;
     if(!sessionId) return;
 
+    // 
+
     setMessages((prev) => [...prev, { sender: "user", text: textToSend }]);
     setInput("");
     setLoading(true);
