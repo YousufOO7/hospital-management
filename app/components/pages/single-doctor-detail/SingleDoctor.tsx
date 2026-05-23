@@ -55,7 +55,7 @@ const SingleDoctor = () => {
         setError(null);
         
         const response = await fetch(
-          `https://chat-hospital.vercel.app/single-doctor/${doctorId}`
+          `https://hospital-server-gbvd.vercel.app/single-doctor/${doctorId}`
         );
         
         if (!response.ok) {

@@ -19,7 +19,7 @@ const DoctorList: React.FC = () => {
         setLoading(true);
         setError(null);
         
-        const res = await fetch("https://chat-hospital.vercel.app/allDoctors");
+        const res = await fetch("https://hospital-server-gbvd.vercel.app/allDoctors");
         
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
