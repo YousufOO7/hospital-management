@@ -43,7 +43,7 @@ export default function ChatBot() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://hospital-server-nu.vercel.app/chat", {
+      const res = await fetch("https://chat-server-rust.vercel.app/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: textToSend, sessionId }),
