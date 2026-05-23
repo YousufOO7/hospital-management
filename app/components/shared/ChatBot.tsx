@@ -43,7 +43,7 @@ export default function ChatBot() {
     setLoading(true);
 
     try {
-      const res = await fetch("https://chat-server-rust.vercel.app/chat", {
+      const res = await fetch("https://chat-hospital.vercel.app/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: textToSend, sessionId }),
@@ -69,7 +69,7 @@ export default function ChatBot() {
           💬
         </button>
       ) : (
-        <div className="w-96 h-[600px] bg-white shadow-2xl rounded-xl flex flex-col overflow-hidden border">
+        <div className="w-96 h-150 bg-white shadow-2xl rounded-xl flex flex-col overflow-hidden border">
           {/* Header */}
           <div className="bg-blue-600 text-white p-4 flex justify-between items-center">
             <div className="flex items-center gap-2">

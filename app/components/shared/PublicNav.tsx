@@ -1,7 +1,6 @@
 "use client";
 
 import { publicNavigationLinks } from "@/app/lib/utlis/common/navigation/publicNavigationLinks";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -35,9 +34,7 @@ const PublicNav = () => {
           </div>
 
           {/* login */}
-          <div>
-            <Button variant={"default"}>Login</Button>
-          </div>
+          
         </div>
       </div>
     </nav>
