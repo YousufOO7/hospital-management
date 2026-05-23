@@ -48,7 +48,7 @@ The chatbot behaves like an initial doctor consultation.
 ## 🌐 Live Project
 
 🔗 Live Demo:  
-https://hospital-management-vert-nu.vercel.app/
+https://hospital-chat-system.vercel.app/
 
 ---
 
